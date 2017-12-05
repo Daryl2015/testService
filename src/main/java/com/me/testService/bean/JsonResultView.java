@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 
-public class CommonResponse<T> implements Serializable {
+public class JsonResultView<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final String SUCCESS = "0000";
     public static final String SUCCESS_MSG = "操作成功";
@@ -12,21 +12,21 @@ public class CommonResponse<T> implements Serializable {
     protected String msg;
     protected String data;
 
-    public CommonResponse() {
+    public JsonResultView() {
     }
 
-    public CommonResponse(String code, String msg) {
+    public JsonResultView(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public CommonResponse(String code, String msg, T data) {
+    public JsonResultView(String code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = JSON.toJSONString(data);
     }
 
-    public CommonResponse(String code, T data) {
+    public JsonResultView(String code, T data) {
         this.code = code;
         this.data = JSON.toJSONString(data);
     }
