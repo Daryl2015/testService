@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,12 +15,49 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 import com.alibaba.fastjson.JSONObject;
 import com.me.testService.bean.JsonResultView;
 import com.me.testService.bean.TestBean;
+import com.me.testService.service.TestFeignService;
 import com.me.testService.util.DataUtils;
 
 @RestController
 @RequestMapping("/test")
 @SuppressWarnings("all")
 public class TestServiceController {
+
+    @Autowired
+    private TestFeignService testFeignService;
+
+    /**
+     * getTestBean
+     */
+    @RequestMapping("/getTestBean")
+    @ResponseBody
+    public JSONObject getTestBean(String id, String testJson) {
+        return testFeignService.getTestBean(id, testJson);
+
+    }
+
+    /**
+     * testhystrix
+     */
+    @RequestMapping("/testhystrix")
+    @ResponseBody
+    public JSONObject testhystrix(String id, String testJson) {
+        return testFeignService.testhystrix(id, testJson);
+
+    }
+
+    /**
+     * testJson
+     */
+    @RequestMapping("/getTestJson")
+    @ResponseBody
+    public JSONObject getTestJson(String id, String testJson) {
+        JSONObject obj = new JSONObject();
+        obj.put("name", "serverWeb");
+        obj.put("value", "getTestJson".concat("-").concat(id).concat("-").concat(testJson));
+        obj.put("updateTime", DataUtils.formatDateTime(new Date()));
+        return obj;
+    }
 
     /**
      * 测试服务开启

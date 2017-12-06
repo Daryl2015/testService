@@ -14,17 +14,17 @@ public class TestFeignServiceImpl implements TestFeignService {
     @Override
     public JSONObject getTestBean(String id, String testJson) {
         JSONObject obj = new JSONObject();
-        obj.put("name", "熔断");
-        obj.put("value", "熔断返回值");
+        obj.put("name", "熔断-web");
+        obj.put("value", "熔断返回值-web");
         obj.put("updateTime", DataUtils.formatDateTime(new Date()));
         return obj;
     }
 
     @Override
-    public JSONObject getTestJson(String id, String testJson) {
+    public JSONObject testhystrix(String id, String testJson) {
         JSONObject obj = new JSONObject();
-        obj.put("name", "熔断");
-        obj.put("value", "熔断返回值");
+        obj.put("name", "熔断-web");
+        obj.put("value", "熔断返回值-web");
         obj.put("updateTime", DataUtils.formatDateTime(new Date()));
         return obj;
     }
